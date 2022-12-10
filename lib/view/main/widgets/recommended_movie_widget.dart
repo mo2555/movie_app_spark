@@ -57,27 +57,27 @@ class RecommendedMovieWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Row(
-                                  children: [
-                                    Icon(
+                                  children: const [
+                                     Icon(
                                       Icons.star,
                                       color: Colors.deepOrange,
                                       size: 10,
                                     ),
-                                    Text(
+                                     Text(
                                       '7.7',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 8),
                                     )
                                   ],
                                 ),
-                                Text(
+                                const Text(
                                   'Ronaldo',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 10,
                                   ),
                                 ),
-                                Text(
+                                const Text(
                                   '2012 R 75',
                                   style: TextStyle(
                                     color: Colors.white,

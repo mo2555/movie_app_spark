@@ -28,7 +28,7 @@ class TopMovieWidget extends StatelessWidget {
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: const [
                       Text(
                         'Text1 Text1 Text1 Text1 Text1 Text1 ',

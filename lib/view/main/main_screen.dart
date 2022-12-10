@@ -10,8 +10,8 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children:  [
-         TopMovieWidget(),
+      children: [
+        TopMovieWidget(),
         Container(
           height: 15,
           color: Colors.black,
@@ -27,7 +27,7 @@ class MainScreen extends StatelessWidget {
             alignment: Alignment.center,
             color: Colors.black,
           ),
-        )
+        ),
       ],
     );
   }
