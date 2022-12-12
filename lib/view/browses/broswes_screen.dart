@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'widget/browses_list_widget.dart';
+import 'package:movie_app_spark/view/browses/widgets/browses_grid_view_widget.dart';
 
 class BrowsesScreen extends StatelessWidget {
   const BrowsesScreen({Key? key}) : super(key: key);
@@ -8,24 +7,25 @@ class BrowsesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
       color: Colors.black,
-padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.only(
+        top: 80,
+        right: 12,
+        left: 12,
+        bottom: 5,
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
-          SizedBox(
-            height: 60,
-          ),
           Text(
-            'Browse Category ',
+            'BROWSES CATEGORY',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 18,
               fontWeight: FontWeight.bold,
+              fontSize: 18,
             ),
           ),
-          BrowsesListWidget(),
+          BrowsesGridViewWidget(),
         ],
       ),
     );

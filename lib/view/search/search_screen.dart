@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'widgets/search_list_widget.dart';
+import 'package:movie_app_spark/view/search/widgets/search_list_view_widget.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -10,38 +9,38 @@ class SearchScreen extends StatelessWidget {
     return Container(
       color: Colors.black,
       padding: const EdgeInsets.only(
-        left: 15,
+        top: 50,
         right: 15,
-        top: 50
+        left: 15,
+        bottom: 5,
       ),
       child: Column(
         children: [
           TextField(
             decoration: InputDecoration(
+              hintText: 'Search',
+              prefixIcon: const Icon(
+                Icons.search,
+              ),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(
+                    color: Colors.grey,
+                  )),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: const BorderSide(
-                  color: Colors.grey
+                  color: Colors.grey,
                 ),
               ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
-                borderSide: const BorderSide(
-                    color: Colors.grey
-                ),
-              ),
-              fillColor: const Color(0xFF232423),
+              fillColor: const Color(0xFF373636),
               filled: true,
-              hintText: 'Search',
-              prefixIcon: Icon(
-                Icons.search,
-              ),
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: 12,
           ),
-          SearchListWidget(),
+          const SearchListViewWidget(),
         ],
       ),
     );

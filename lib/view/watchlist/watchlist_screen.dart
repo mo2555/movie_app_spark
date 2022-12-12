@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app_spark/view/search/widgets/search_list_widget.dart';
-import 'package:movie_app_spark/view/watchlist/widget/watchlist_widget.dart';
+import 'package:movie_app_spark/view/watchlist/widgets/watchlist_list_view_widget.dart';
+
+import '../shared/list_view_item.dart';
 
 class WatchlistScreen extends StatelessWidget {
   const WatchlistScreen({Key? key}) : super(key: key);
@@ -8,24 +9,25 @@ class WatchlistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
       color: Colors.black,
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.only(
+        top: 80,
+        right: 12,
+        left: 12,
+        bottom: 5,
+      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
-          SizedBox(
-            height: 60,
-          ),
           Text(
-            'Watchlist ',
+            'WATCHLIST',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 18,
               fontWeight: FontWeight.bold,
+              fontSize: 18,
             ),
           ),
-          WatchlistWidget()
+          WatchlistListViewWidget(),
         ],
       ),
     );
