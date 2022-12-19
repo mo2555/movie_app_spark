@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_spark/view/movie_overview/movie_overview_screen.dart';
 
 class TopMovieWidget extends StatelessWidget {
   const TopMovieWidget({Key? key}) : super(key: key);
@@ -65,11 +66,23 @@ class TopMovieWidget extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.topLeft,
                 children: [
-                  Image.asset(
-                    'assets/images/ronaldo.png',
-                    fit: BoxFit.cover,
-                    height: 180,
-                    width: 120,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (ctx) => MovieOverviewScreen(
+                            title: 'Text1 Text1 Text1 Text1 Text1 Text1 ',
+                          ),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      'assets/images/ronaldo.png',
+                      fit: BoxFit.cover,
+                      height: 180,
+                      width: 120,
+                    ),
                   ),
                   Container(
                     color: Colors.grey,
