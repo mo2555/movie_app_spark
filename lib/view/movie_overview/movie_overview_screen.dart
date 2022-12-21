@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_spark/utils/app_themes/app_themes.dart';
+import 'package:movie_app_spark/view/movie_overview/widges/movie_details_widget.dart';
 import 'package:movie_app_spark/view/movie_overview/widges/movie_overview_top_widget.dart';
 
-import 'widges/movie_details_widget.dart';
-
 class MovieOverviewScreen extends StatelessWidget {
-  const MovieOverviewScreen({Key? key, required this.title}) : super(key: key);
+  const MovieOverviewScreen({
+    Key? key,
+    required this.imageUrl,
+    required this.title,
+    required this.time,
+  }) : super(key: key);
+  final String imageUrl;
   final String title;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF131213),
+      backgroundColor: const Color(0xFF121312),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF131213),
-        title: Text(title),
-        foregroundColor: Colors.white,
         elevation: 0,
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.black87,
+        title: Text(
+          title,
+        ),
       ),
       body: ListView(
-        //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MovieOverviewTopWidget(
+            imageUrl: imageUrl,
             title: title,
+            time: time,
           ),
-          MovieDetailsWidget(),
+          MovieDetailsWidget(imageUrl: imageUrl),
         ],
       ),
     );
