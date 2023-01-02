@@ -1,5 +1,5 @@
-class MovieDataModel {
-  MovieDataModel({
+class LatestDataModel {
+  LatestDataModel({
       this.adult, 
       this.backdropPath, 
       this.belongsToCollection, 
@@ -25,8 +25,30 @@ class MovieDataModel {
       this.video, 
       this.voteAverage, 
       this.voteCount,});
+  /*
+   {
+            "adult": false,
+            "backdrop_path": "/s16H6tpK2utvwDtzZ8Qy4qm5Emw.jpg",
+            "genre_ids": [
+                878,
+                12,
+                28
+            ],
+            "id": 76600,
+            "original_language": "en",
+            "original_title": "Avatar: The Way of Water",
+            "overview": "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
+            "popularity": 6226.777,
+            "poster_path": "/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
+            "release_date": "2022-12-14",
+            "title": "Avatar: The Way of Water",
+            "video": false,
+            "vote_average": 7.7,
+            "vote_count": 2932
+        },
+   */
 
-  MovieDataModel.fromJson(dynamic json) {
+  LatestDataModel.fromJson(Map<String,dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     belongsToCollection = json['belongs_to_collection'];
@@ -34,7 +56,7 @@ class MovieDataModel {
     if (json['genres'] != null) {
       genres = [];
       json['genres'].forEach((v) {
-        genres?.add(Genres.fromJson(v));
+        genres?.add(v);
       });
     }
     homepage = json['homepage'];
@@ -48,7 +70,7 @@ class MovieDataModel {
     if (json['production_companies'] != null) {
       productionCompanies = [];
       json['production_companies'].forEach((v) {
-        productionCompanies?.add(ProductionCompanies.fromJson(v));
+        productionCompanies?.add(v.fromJson(v));
       });
     }
     if (json['production_countries'] != null) {
@@ -63,7 +85,7 @@ class MovieDataModel {
     if (json['spoken_languages'] != null) {
       spokenLanguages = [];
       json['spoken_languages'].forEach((v) {
-        spokenLanguages?.add(SpokenLanguages.fromJson(v));
+        spokenLanguages?.add(v);
       });
     }
     status = json['status'];
@@ -77,86 +99,26 @@ class MovieDataModel {
   dynamic backdropPath;
   dynamic belongsToCollection;
   int? budget;
-  List<Genres>? genres;
+  List<dynamic>? genres;
   String? homepage;
   int? id;
-  String? imdbId;
+  dynamic imdbId;
   String? originalLanguage;
   String? originalTitle;
   String? overview;
   double? popularity;
   dynamic posterPath;
-  List<ProductionCompanies>? productionCompanies;
+  List<dynamic>? productionCompanies;
   List<dynamic>? productionCountries;
   String? releaseDate;
   int? revenue;
   int? runtime;
-  List<SpokenLanguages>? spokenLanguages;
+  List<dynamic>? spokenLanguages;
   String? status;
   String? tagline;
   String? title;
   bool? video;
   double? voteAverage;
   int? voteCount;
-
-}
-
-class SpokenLanguages {
-  SpokenLanguages({
-      this.englishName, 
-      this.iso6391, 
-      this.name,});
-
-  SpokenLanguages.fromJson(dynamic json) {
-    englishName = json['english_name'];
-    iso6391 = json['iso_639_1'];
-    name = json['name'];
-  }
-  String? englishName;
-  String? iso6391;
-  String? name;
-
-}
-
-class ProductionCompanies {
-  ProductionCompanies({
-      this.id, 
-      this.logoPath, 
-      this.name, 
-      this.originCountry,});
-
-  ProductionCompanies.fromJson(dynamic json) {
-    id = json['id'];
-    logoPath = json['logo_path'];
-    name = json['name'];
-    originCountry = json['origin_country'];
-  }
-  int? id;
-  dynamic logoPath;
-  String? name;
-  String? originCountry;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['logo_path'] = logoPath;
-    map['name'] = name;
-    map['origin_country'] = originCountry;
-    return map;
-  }
-
-}
-
-class Genres {
-  Genres({
-      this.id, 
-      this.name,});
-
-  Genres.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-  }
-  int? id;
-  String? name;
 
 }

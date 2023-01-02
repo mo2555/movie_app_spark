@@ -4,60 +4,104 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:movie_app_spark/models/movie_data_model.dart';
+import 'package:movie_app_spark/models/popular_data_model.dart';
 import 'package:movie_app_spark/utils/app_constants/app_constants.dart';
 import 'package:movie_app_spark/utils/end_points/end_points.dart';
 
+import '../models/latest_data_model.dart';
+
 class GetMoviesProvider extends ChangeNotifier {
-  MovieDataModel? movieDataModelLatest;
 
-  bool loading = false;
-
-  getLatest() async {
-    loading = true;
+  bool getLatestLoading = false;
+  
+  LatestDataModel? latestDataModel;
+  
+getLatest()async{
+  getLatestLoading = true;
+  notifyListeners();
+  try{
+    http.Response response = await http.get(
+      Uri.parse("${EndPoints.baseUrl}${EndPoints.movie}${EndPoints.latest}?api_key=${AppConstants.apiKey}"),
+    );
+    if(response.statusCode==200){
+      latestDataModel = LatestDataModel.fromJson(json.decode(response.body));
+      print(latestDataModel!.id);
+      notifyListeners();
+    }else{
+      print(json.decode(response.body));
+    }
+    getLatestLoading = false;
     notifyListeners();
-    try {
-      http.Response response = await http.get(
-        Uri.parse(
-          '${EndPoints.baseUrl}${EndPoints.movie}${EndPoints.latest}?api_key=${AppConstants.apiKey}',
-        ),
-      );
+  }on SocketException{
+    getLatestLoading = false;
+    notifyListeners();
+  }catch(e){
+    getLatestLoading = false;
+    notifyListeners();
+  }
+}
 
-      if (response.statusCode == 200) {
-        movieDataModelLatest =
-            MovieDataModel.fromJson(json.decode(response.body));
-        loading = false;
+  bool getPopularLoading = false;
+
+  List<PopularDataModel> popularDataModel = [];
+
+  getPopular()async{
+    getPopularLoading = true;
+    notifyListeners();
+    try{
+      http.Response response = await http.get(
+        Uri.parse("${EndPoints.baseUrl}${EndPoints.movie}${EndPoints.popular}?api_key=${AppConstants.apiKey}"),
+      );
+      if(response.statusCode==200){
+        json.decode(response.body)['results'].forEach((item){
+          popularDataModel.add(PopularDataModel.fromJson(item));
+        });
+        print(popularDataModel[0].title);
         notifyListeners();
       }else{
         print(json.decode(response.body));
-        loading = false;
-        notifyListeners();
       }
-    } on SocketException {
-      Fluttertoast.showToast(
-        msg: "Network Error!!",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-      loading = false;
+      getPopularLoading = false;
       notifyListeners();
-    } catch (e) {
-      Fluttertoast.showToast(
-        msg: e.toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
+    }on SocketException{
+      getPopularLoading = false;
+      notifyListeners();
+    }
+
+  }
+
+  bool getTopRatedLoading = false;
+
+  LatestDataModel? topRatedDataModel;
+
+  getTopRated()async{
+    getLatestLoading = true;
+    notifyListeners();
+    try{
+      http.Response response = await http.get(
+        Uri.parse("${EndPoints.baseUrl}${EndPoints.movie}${EndPoints.latest}?api_key=${AppConstants.apiKey}"),
       );
-      loading = false;
+      if(response.statusCode==200){
+        latestDataModel = LatestDataModel.fromJson(json.decode(response.body));
+        print(latestDataModel!.id);
+        notifyListeners();
+      }else{
+        print(json.decode(response.body));
+      }
+      getLatestLoading = false;
+      notifyListeners();
+    }on SocketException{
+      getLatestLoading = false;
+      notifyListeners();
+    }catch(e){
+      getLatestLoading = false;
       notifyListeners();
     }
   }
+
 }
+
+
 
 /*
 {

@@ -10,4 +10,12 @@ class EndPoints {
 
   static const String top_rated = '/top_rated';
 
+  static const String search = '/search/movie';
+
+  static const String genre = '/genre/movie/list';
+
+  static const String list = '/list';
+
+
+
 }

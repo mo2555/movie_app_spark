@@ -10,4 +10,5 @@ class AppConstants {
   }
 
   static const String apiKey = '2a81b0f3fbbe3656bd9be040bdeed583';
+
 }
