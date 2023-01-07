@@ -15,7 +15,7 @@ class PopularDataModel {
       this.voteAverage, 
       this.voteCount,});
 
-  PopularDataModel.fromJson(dynamic json) {
+  PopularDataModel.fromJson(Map<String,dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];

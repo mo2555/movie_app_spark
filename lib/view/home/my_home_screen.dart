@@ -18,6 +18,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
     Future.delayed(Duration.zero, () {
       Provider.of<GetMoviesProvider>(context, listen: false).getLatest();
       Provider.of<GetMoviesProvider>(context, listen: false).getPopular();
+      Provider.of<GetMoviesProvider>(context, listen: false).getTopRated();
+      Provider.of<GetMoviesProvider>(context, listen: false).getGenres();
     });
 
     /*

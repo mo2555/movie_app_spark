@@ -1,18 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_spark/providers/get_movies_provider.dart';
 import 'package:movie_app_spark/utils/app_themes/app_themes.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/app_constants/app_constants.dart';
 
-class MovieDetailsWidget extends StatelessWidget {
-  MovieDetailsWidget({Key? key, required this.imageUrl}) : super(key: key);
+class MovieDetailsWidget extends StatefulWidget {
+  MovieDetailsWidget(
+      {Key? key,
+      required this.imageUrl,
+      required this.description,
+      required this.rate,
+      required this.genres})
+      : super(key: key);
   final String imageUrl;
+  final String description;
+  final double rate;
+  final List genres;
 
-  final List list = [
-    1,
-    2,
-    3,
-    4,
-  ];
+  @override
+  State<MovieDetailsWidget> createState() => _MovieDetailsWidgetState();
+}
+
+class _MovieDetailsWidgetState extends State<MovieDetailsWidget> {
+  List genresName = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () {
+      Provider.of<GetMoviesProvider>(context,listen: false).genreDataModel.forEach((element) {
+        if (widget.genres.contains(element.id)) {
+          genresName.add(element.name ?? '');
+          setState(() {
+
+          });
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +58,8 @@ class MovieDetailsWidget extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
-                  imageUrl,
+                image: NetworkImage(
+                  widget.imageUrl,
                 ),
               ),
             ),
@@ -57,10 +84,10 @@ class MovieDetailsWidget extends StatelessWidget {
                   width: AppConstants.width(context) - 134,
                   height:
                       ((((AppConstants.width(context) - 144) / 3) / 2.5) + 5) *
-                          (list.length / 3).ceil(),
+                          (genresName.length / 3).ceil(),
                   child: GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: list.length,
+                    itemCount: genresName.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
@@ -76,9 +103,9 @@ class MovieDetailsWidget extends StatelessWidget {
                           color: Colors.grey,
                         ),
                       ),
-                      child: const Text(
-                        'Action',
-                        style: TextStyle(
+                      child:  Text(
+                        genresName[index],
+                        style: const TextStyle(
                           color: Colors.white70,
                           fontSize: 12,
                         ),
@@ -86,21 +113,21 @@ class MovieDetailsWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Text(
-                  'tt text t text text text text',
-                  style: TextStyle(
+                Text(
+                  widget.description,
+                  style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 12,
                   ),
                 ),
                 Row(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       Icons.star,
                       color: Colors.yellow,
                     ),
                     Text(
-                      '7.7',
+                      '${widget.rate}',
                       style: AppThemes.textStyle1,
                     ),
                   ],

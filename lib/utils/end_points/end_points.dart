@@ -8,14 +8,13 @@ class EndPoints {
 
   static const String latest = '/latest';
 
-  static const String top_rated = '/top_rated';
+  static const String topRated = '/top_rated';
 
-  static const String search = '/search/movie';
+  static const String search = '/search/movie?query=';
 
   static const String genre = '/genre/movie/list';
 
   static const String list = '/list';
-
 
 
 }

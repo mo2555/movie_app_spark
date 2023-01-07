@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_spark/providers/get_movies_provider.dart';
+import 'package:movie_app_spark/providers/watchlist_provider.dart';
 import 'package:movie_app_spark/view/movie_overview/movie_overview_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -57,7 +58,7 @@ class TopMovieWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Text(
-                                    provider.latestDataModel!.title??'',
+                                    provider.latestDataModel!.title ?? '',
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 13,
@@ -65,7 +66,7 @@ class TopMovieWidget extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    provider.latestDataModel!.overview??'',
+                                    provider.latestDataModel!.overview ?? '',
                                     style: const TextStyle(
                                       color: Colors.grey,
                                       fontSize: 10,
@@ -97,13 +98,29 @@ class TopMovieWidget extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (ctx) =>
-                                           MovieOverviewScreen(
-                                        imageUrl: provider.latestDataModel!.posterPath == null
+                                      builder: (ctx) => MovieOverviewScreen(
+                                        imageUrl: provider.latestDataModel!
+                                                    .posterPath ==
+                                                null
                                             ? 'https://tafttoday.com/wp-content/uploads/2019/05/MV5BZTliNWJhM2YtNDc1MC00YTk1LWE2MGYtZmE4M2Y5ODdlNzQzXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_-1-568x900.jpg'
                                             : 'http://image.tmdb.org/t/p/w500/${provider.latestDataModel!.posterPath}',
-                                        title: 'title',
-                                        time: 'time',
+                                        title:
+                                            provider.latestDataModel!.title ??
+                                                '',
+                                        time: provider
+                                                .latestDataModel!.releaseDate ??
+                                            '',
+                                        description: provider
+                                                .latestDataModel!.overview ??
+                                            '',
+                                        rate: provider
+                                                .latestDataModel!.voteAverage ??
+                                            0.0,
+                                        genresId: provider
+                                                .latestDataModel!.genreIds ??
+                                            [],
+                                        movieId:
+                                            provider.latestDataModel!.id ?? 0,
                                       ),
                                     ),
                                   );
@@ -113,7 +130,8 @@ class TopMovieWidget extends StatelessWidget {
                                   height: 180,
                                   width: 120,
                                   placeholder: 'assets/images/ronaldo.png',
-                                  image: provider.latestDataModel!.posterPath == null
+                                  image: provider.latestDataModel!.posterPath ==
+                                          null
                                       ? 'https://tafttoday.com/wp-content/uploads/2019/05/MV5BZTliNWJhM2YtNDc1MC00YTk1LWE2MGYtZmE4M2Y5ODdlNzQzXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_-1-568x900.jpg'
                                       : 'http://image.tmdb.org/t/p/w500/${provider.latestDataModel!.posterPath}',
                                   imageErrorBuilder: (c, v, b) => Image.asset(
@@ -124,15 +142,35 @@ class TopMovieWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
-                                color: Colors.grey,
-                                height: 40,
-                                width: 25,
-                                child: const Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                ),
-                              )
+                              Consumer<WatchlistProvider>(
+                                  builder: (context, provider, _) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    provider.addOrRemoveData(
+                                        model: context
+                                            .read<GetMoviesProvider>()
+                                            .latestDataModel);
+                                  },
+                                  child: Container(
+                                    color: provider.watchlistData.contains(
+                                            context
+                                                .read<GetMoviesProvider>()
+                                                .latestDataModel)
+                                        ? Colors.deepOrange
+                                        : Colors.grey,
+                                    height: 40,
+                                    width: 25,
+                                    child: Icon(
+                                      provider.watchlistData.contains(context
+                                              .read<GetMoviesProvider>()
+                                              .latestDataModel)
+                                          ? Icons.check
+                                          : Icons.add,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                );
+                              })
                             ],
                           ),
                         ),

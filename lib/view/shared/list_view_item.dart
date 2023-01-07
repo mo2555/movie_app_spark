@@ -6,7 +6,7 @@ class ListViewItem extends StatelessWidget {
     required this.imageUrl,
     required this.title,
     required this.description,
-     this.check,
+    this.check,
   }) : super(key: key);
 
   final String imageUrl;
@@ -40,23 +40,25 @@ class ListViewItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
+                image: NetworkImage(
                   imageUrl,
                 ),
               ),
             ),
             clipBehavior: Clip.antiAlias,
-            child: check==true?Container(
-              alignment: Alignment.center,
-              height: 40,
-              width: 30,
-              color: Colors.yellow.shade900,
-              child: const Icon(
-                Icons.check,
-                color: Colors.white,
-                size: 15,
-              ),
-            ):null,
+            child: check == true
+                ? Container(
+                    alignment: Alignment.center,
+                    height: 40,
+                    width: 30,
+                    color: Colors.yellow.shade900,
+                    child: const Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 15,
+                    ),
+                  )
+                : null,
           ),
           const SizedBox(
             width: 5,

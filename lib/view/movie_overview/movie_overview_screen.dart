@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app_spark/utils/app_themes/app_themes.dart';
 import 'package:movie_app_spark/view/movie_overview/widges/movie_details_widget.dart';
 import 'package:movie_app_spark/view/movie_overview/widges/movie_overview_top_widget.dart';
 
@@ -9,10 +8,18 @@ class MovieOverviewScreen extends StatelessWidget {
     required this.imageUrl,
     required this.title,
     required this.time,
+    required this.description,
+    required this.genresId,
+    required this.rate,
+    required this.movieId,
   }) : super(key: key);
   final String imageUrl;
   final String title;
   final String time;
+  final String description;
+  final List<dynamic> genresId;
+  final double rate;
+  final int movieId;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,12 @@ class MovieOverviewScreen extends StatelessWidget {
             title: title,
             time: time,
           ),
-          MovieDetailsWidget(imageUrl: imageUrl),
+          MovieDetailsWidget(
+            imageUrl: imageUrl,
+            description: description,
+            rate: rate,
+            genres: genresId,
+          ),
         ],
       ),
     );
