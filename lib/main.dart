@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_spark/providers/api_provider.dart';
 import 'package:movie_app_spark/providers/bottom_nav_bar_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,9 @@ void main() {
       providers: [
         ChangeNotifierProvider.value(
           value: BottomNavBarProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: APIProvider(),
         ),
       ],
       child: const MyApp(),

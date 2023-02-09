@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_spark/providers/api_provider.dart';
 import 'package:movie_app_spark/providers/bottom_nav_bar_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,12 @@ class MyHomeScreen extends StatelessWidget {
           unselectedItemColor: Colors.grey,
           elevation: 0,
           backgroundColor: Colors.black87,
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () {
+            Provider.of<APIProvider>(context, listen: false).searchMovie(q: 'max');
+          },
         ),
       );
     });
